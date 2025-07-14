@@ -1,6 +1,6 @@
-const a = Number(prompt(" Nhajapj vào cạnh a:"));
-const b = Number(prompt(" Nhajapj vào cạnh b:"));
-const c = Number(prompt(" Nhajapj vào cạnh c:"));
+const a = Number(prompt(" Nhập vào cạnh a:"));
+const b = Number(prompt(" Nhập vào cạnh b:"));
+const c = Number(prompt(" Nhập vào cạnh c:"));
 
 function isTriangle(a, b, c) {
   if (a + b > c && a + c > b && c + b > a) {
