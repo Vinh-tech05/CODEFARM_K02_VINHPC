@@ -3,6 +3,10 @@ const b = Number(prompt("Nhập số b vào đây: "));
 const c = Number(prompt("Nhập số c vào đây: "));
 
 function swapThreeNumbers(a, b, c) {
+  if (isNaN(a) || isNaN(b) || isNaN(c)) {
+    console.log("Bạn phải nhập hai số hợp lệ!");
+    return;
+  }
   if (a > b) {
     a = a + b;
     b = a - b;
