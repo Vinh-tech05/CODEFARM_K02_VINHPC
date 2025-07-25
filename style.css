@@ -133,6 +133,13 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 100, 0, 0.1);
 }
+.task-scroll-area {
+  max-height: 80vh;
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
 
 .btn-custom {
   margin-right: 10px;
