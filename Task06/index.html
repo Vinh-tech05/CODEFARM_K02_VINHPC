@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Task06 - Phạm Công Vinh</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: linear-gradient(to top, #fff7b2, #fff9db);
+        min-height: 100vh;
+        color: #444;
+        overflow-x: hidden;
+        position: relative;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      /* Cánh hoa anh đào rơi */
+      .petal {
+        position: fixed;
+        width: 15px;
+        height: 15px;
+        background: #ffc0cb;
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        opacity: 0.8;
+        pointer-events: none;
+        animation-name: fallPetal;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes fallPetal {
+        0% {
+          transform: translateY(-20px) rotate(0deg);
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* Chim bay */
+      .bird-group {
+        position: fixed;
+        top: 60px;
+        left: -200px;
+        font-size: 24px;
+        z-index: 1001;
+        animation: flyAway 8s linear;
+        white-space: nowrap;
+        color: #a33;
+      }
+
+      @keyframes flyAway {
+        0% {
+          left: -200px;
+        }
+        100% {
+          left: 120vw;
+        }
+      }
+
+      /* Pháo hoa */
+      .firework {
+        position: fixed;
+        border-radius: 50%;
+        pointer-events: none;
+        animation: explode 0.8s ease-out forwards;
+        z-index: 10000;
+      }
+
+      @keyframes explode {
+        0% {
+          opacity: 1;
+          transform: scale(0.2);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(1.5);
+        }
+      }
+
+      /* Bánh chưng, cây đào, lì xì */
+      .decorations {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 50px;
+        display: flex;
+        gap: 40px;
+        user-select: none;
+        z-index: 10001;
+      }
+
+      /* Nút */
+      .btn-glow:hover {
+        box-shadow: 0 0 15px rgba(255, 182, 193, 0.7);
+      }
+
+      h1 {
+        color: #b23a48;
+        text-shadow: 1px 1px 5px #ffd6de;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-5">
+      <h1 class="text-center mb-4 display-5 fw-bold">
+        🌸 Task06 - PHẠM CÔNG VINH🌸
+      </h1>
+
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <button
+          class="btn btn-outline-danger btn-glow"
+          onclick="loadScript('bt1-task06.js')"
+        >
+          Bài 1
+        </button>
+        <button
+          class="btn btn-outline-success btn-glow"
+          onclick="loadScript('bt2-task06.js')"
+        >
+          Bài 2
+        </button>
+        <button
+          class="btn btn-outline-warning btn-glow"
+          onclick="loadScript('bt3-task06.js')"
+        >
+          Bài 3
+        </button>
+        <button
+          class="btn btn-outline-primary btn-glow"
+          onclick="loadScript('bt4-task06.js')"
+        >
+          Bài 4
+        </button>
+        <button
+          class="btn btn-outline-info btn-glow"
+          onclick="loadScript('bt5-task06.js')"
+        >
+          Bài 5
+        </button>
+      </div>
+
+      <div id="output" class="mt-5 text-center fst-italic text-dark">
+        <p>🔍 Kết quả bài tập sẽ hiển thị ở đây nếu JS có in ra.</p>
+      </div>
+    </div>
+
+    <!-- Cánh hoa anh đào rơi -->
+    <script>
+      function createPetal() {
+        const petal = document.createElement("div");
+        petal.className = "petal";
+        petal.style.left = Math.random() * window.innerWidth + "px";
+        petal.style.animationDuration = 5 + Math.random() * 5 + "s";
+        petal.style.animationDelay = Math.random() * 5 + "s";
+        document.body.appendChild(petal);
+
+        setTimeout(() => {
+          petal.remove();
+        }, 10000);
+      }
+
+      setInterval(createPetal, 400);
+    </script>
+
+    <!-- Chim bay -->
+    <script>
+      function releaseBirds() {
+        const birds = document.createElement("div");
+        birds.className = "bird-group";
+        birds.innerText = "🐦 🐦 🐦 🐦";
+        birds.style.top = 30 + Math.random() * 100 + "px";
+        document.body.appendChild(birds);
+        setTimeout(() => birds.remove(), 8000);
+      }
+
+      setInterval(() => {
+        if (Math.random() > 0.5) releaseBirds();
+      }, 10000);
+    </script>
+
+    <!-- Pháo hoa -->
+    <script>
+      function createFirework() {
+        const firework = document.createElement("div");
+        firework.className = "firework";
+
+        // Ngẫu nhiên màu sắc pháo hoa
+        const colors = [
+          "#ff3f3f",
+          "#ffb43f",
+          "#ffe93f",
+          "#3fff89",
+          "#3fe7ff",
+          "#ff3fdc",
+          "#a93fff",
+        ];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+
+        firework.style.backgroundColor = color;
+        firework.style.width = firework.style.height =
+          20 + Math.random() * 30 + "px";
+        firework.style.left = Math.random() * window.innerWidth + "px";
+        firework.style.top = Math.random() * (window.innerHeight / 2) + "px";
+
+        document.body.appendChild(firework);
+
+        setTimeout(() => {
+          firework.remove();
+        }, 800);
+      }
+
+      setInterval(createFirework, 1200);
+    </script>
+
+    <!-- Trang trí: bánh chưng, cây đào, lì xì -->
+    <div class="decorations" aria-label="Trang trí Tết">
+      <span title="Bánh chưng">🎁</span>
+      <span title="Cây đào">🌸</span>
+      <span title="Lì xì">🧧</span>
+    </div>
+
+    <!-- Nạp file JS bài -->
+    <script>
+      function loadScript(fileName) {
+        const oldScript = document.getElementById("dynamic-script");
+        if (oldScript) oldScript.remove();
+
+        const script = document.createElement("script");
+        script.src = fileName;
+        script.id = "dynamic-script";
+        document.body.appendChild(script);
+      }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
