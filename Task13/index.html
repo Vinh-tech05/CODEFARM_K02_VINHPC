@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TASK_13</title>
+    <link rel="stylesheet" href="main.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <button id="trollBtn" class="btn btn-warning" onclick="toggleMode()">
+      Đừng CLICK vào
+    </button>
+    <div class="container">
+      <div class="filters">
+        <div class="filter-row">
+          <div class="search-container">
+            <input
+              type="text"
+              id="searchInput"
+              class="search-input"
+              placeholder="Tìm kiếm sản phẩm..."
+            />
+          </div>
+          <div class="sort-container">
+            <select id="sortSelect">
+              <option value="">Sắp xếp theo giá</option>
+              <option value="asc">Giá tăng dần</option>
+              <option value="desc">Giá giảm dần</option>
+            </select>
+          </div>
+        </div>
+        <div class="category-filters">
+          <div class="checkbox-item">
+            <input type="checkbox" id="games" value="games" />
+            <label for="games">Games</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="smartphones" value="smartphones" />
+            <label for="smartphones">Smartphones</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="cameras" value="cameras" />
+            <label for="cameras">Cameras</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="televisions" value="televisions" />
+            <label for="televisions">Televisions</label>
+          </div>
+        </div>
+      </div>
+
+      <div id="productList" class="product-grid"></div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
