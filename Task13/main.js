@@ -137,7 +137,7 @@ sortSelect.addEventListener("change", filterProducts);
 
 renderProducts(products);
 
-const btn = document.getElementById("trollBtn");
+const btn = document.getElementById("noClick");
 btn.style.position = "absolute";
 btn.style.top = "100px";
 btn.style.left = "100px";
