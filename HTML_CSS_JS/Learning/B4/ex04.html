@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .class-1 {
+        width: 100px;
+        height: 100px;
+        background: greenyellow;
+      }
+      .class-1:nth-child(1) {
+        transform: translate(20px, 20px);
+      }
+      .class-1:nth-child(2) {
+        transform: scale(-1);
+      }
+      .class-1:nth-child(3) {
+        transform: skew(-45deg);
+      }
+      .class-1:nth-child(4) {
+        transform: rotate(90deg);
+      }
+      .class-1:hover {
+        transform: none;
+        background-color: blueviolet;
+        transition: all 0.5s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="class-1">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit
+    </div>
+    <div class="class-1">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit
+    </div>
+    <div class="class-1">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit
+    </div>
+    <div class="class-1">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit
+    </div>
+    <div class="class-1">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit
+    </div>
+  </body>
+</html>

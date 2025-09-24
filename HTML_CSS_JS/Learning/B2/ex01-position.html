@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+      }
+      .parent {
+        width: 300px;
+        height: 300px;
+        background-color: lightcoral;
+        position: relative;
+      }
+      .child {
+        width: 200px;
+        height: 200px;
+        background-color: lightseagreen;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        /* right: 0; */
+        /* z-index: -1; */
+      }
+      .child1 {
+        width: 200px;
+        height: 200px;
+        background-color: rgb(54, 178, 32);
+        position: absolute;
+
+        /* right: 0; */
+        /* z-index: -1; */
+      }
+      .child2 {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(71, 71, 71);
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      <p class="child">Lorem ipsum dolor sit.</p>
+      <p class="child1">Lorem ipsum dolor sit.</p>
+      <p class="child2">Lorem ipsum dolor sit amet</p>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias,
+        laborum.
+      </p>
+    </div>
+  </body>
+</html>

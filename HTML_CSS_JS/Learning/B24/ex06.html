@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button
+      onclick="console.log(`bam`)
+    "
+    >
+      click
+    </button>
+    <ol>
+      <li>Event keyboard</li>
+      <li>Event mouse</li>
+      <li>Event window</li>
+    </ol>
+
+    <button id="myBtn">XEM GIỜ HIỆN TẠI</button>
+    <button id="myBtnremove">REMOVE</button>
+
+    <p id="demo"></p>
+
+    <script>
+      document.getElementById("myBtn").addEventListener("click", displayDate);
+
+      function displayDate() {
+        document.getElementById("demo").innerHTML = Date();
+      }
+
+      document
+        .getElementById("myBtnremove")
+        .addEventListener("click", function () {
+          document
+            .getElementById("myBtn")
+            .removeEventListener("click", displayDate);
+          document.getElementById("demo").innerHTML = "Đã remove sự kiện";
+        });
+    </script>
+  </body>
+</html>

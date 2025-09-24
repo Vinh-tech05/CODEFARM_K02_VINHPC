@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .class-1 {
+        width: 400px;
+        height: 400px;
+        border: 1px solid red;
+      }
+      .car {
+        position: relative;
+        bottom: 12px;
+        right: 12px;
+        animation: Animation 10s ease-in-out infinite;
+      }
+      @keyframes Animation {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        24% {
+          transform: translate(400px, 0px) rotate(0deg);
+        }
+        25% {
+          transform: translate(400px, 0px) rotate(90deg);
+        }
+        49% {
+          transform: translate(400px, 400px) rotate(90deg);
+        }
+        50% {
+          transform: translate(400px, 400px) rotate(180deg);
+        }
+        74% {
+          transform: translate(0px, 400px) rotate(180deg);
+        }
+        75% {
+          transform: translate(0px, 400px) rotate(270deg);
+        }
+        99% {
+          transform: translate(0, 0) rotate(270deg);
+        }
+        100% {
+          transform: translate(0, 0) rotate(360deg);
+        }
+      }
+      .class-2 {
+        margin: 50px;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        border: 1px dotted blue;
+        animation: class-2 10s ease-in-out infinite;
+      }
+      .sun {
+        position: relative;
+        bottom: -190px;
+        right: -145px;
+      }
+
+      .moon {
+        position: relative;
+        bottom: -72px;
+        right: -20px;
+        animation: moon 2s ease-in-out infinite;
+      }
+      .class-3 {
+        width: 150px;
+        height: 150px;
+        /* border: 1px solid red; */
+        animation: moon1 5s ease-in-out infinite;
+        position: relative;
+        right: 36px;
+        bottom: 21px;
+      }
+
+      @keyframes moon1 {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes moon {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes class-2 {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="class-1">
+      <img
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAepJREFUSEvt1s2rTVEYx/HPRfwBFEopymsUQhSZexlQl7xMSJlIEkoGDChKJCViRJIUs5tCkZCQhDAgzCUZkMJ+am3tVuset9NxUu6qXfusl/1dz289z2+dHl1uPV3mGQR2XPF/QtKVOIjJbYT3Ew+xEc9K6/MIJ+ElNuFtY8EC7ERsJm9DcR2b8Q5bMRdT8SmfnAPX4AAmZhOX4QzGFIDD8Q2z8ATD8ChFuO5PwA3YW5BzeQKOLgBH4GsDGFMiuqdYgb7mmjzCTgGDERsPeQP+sYb+TeCQKsLHeIXV/QHX4zQeZNKNTDLfLUgam16czu1LNj4WkYiRdPdjLI8wgPtTlrZRFcUlJ9L5HysB4wx3YUanaLiHyzjyfwKX4AqmYTaOYwJeJye53ULqKPxzmF7lwAfsTg4UZrAtyVq8D29UxTofUdBnU+FG4a8tZG+THxu8hvNYhO34nMoifn8vnWHddyqlc0RctyiV+MCdQpRzMBPjG2OX0nvY5Y/+6rDu34FVWNj4QFjVyfTkzF4crdJ/HOLGiHYVL7CnlbXVY1OSF4aR30qeuAXR/74Q4Si8qVS5UM25iHk4lG6NuK5+t1YX8NLkhyFVuP++ylFutkiaUCM2GLDnOFwnykCBHaz9gUU4CGxLga7/a/sFg+1iHQsf3lMAAAAASUVORK5CYII="
+        alt=""
+        class="car"
+      />
+    </div>
+    <div class="class-2">
+      <img
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAjFJREFUSEvV1kmoj1EYx/HPlWlFZomFLFhYWMjKlIgyrCiiiJQNK8qUhbJTlNlCybgRwoaUIiwl08IQMsu8QYbz6Ly6Xe9/uN23W/7137znnOd7nvP8nqFFJ/9aOpnnvwB2wzAMwls8xrdmX6pZD4dgFaZiDF5n0FDE2i1cxA48qgdvBIz1TViHG9iHM9mzwm5vzMYSTMI2rE3nfpaB6wG74gCmYynONfFsk3EE1zEf39ueqQc8jIW43cajRtzwOJ79RDo7D79aH6gF3ICV2NvIep31RTiaQ/J3WxlwAJ5iDs53ADgOlzAcrwo7ZcAtWI7dHYAVR0NIx7OI/nwrAz7EB3yqANgjhWVw9rIUODKp617Kp34p795VAAylf8RY3C3zcAZCnf0rgBUmArQeJ8uAkTvHKoQVpkLxO8uAU1IOncoKrYp7MFeqSJF/RDMqv3VfvK+AGDH8gmm4XAYM1T7DC3yuANgTo7MIv9ZKi12p+s9N7WdPBcDFua4uqJf40evuYxYudAAaleZq9jBSrWbix0K0pBWp1+3vADBqaaTCmtY2ahXvLrmhRru5gzftABfd4lqyMQE/mgHGnijipzEiFfNlqVqcbQI6Me0/lCeCaMov255p1PFD1puTtFfjZrpECCou0brs9cHM3PEDuB0ba805jYDFBUNIEYtQXS88T1PAE8RME/8o9uHZ1vy95mM0CywMdMf4XP0H5tg+SMPVlbJxoozaXmATYay/pdOBvwE19mAdMhLFwAAAAABJRU5ErkJggg=="
+        alt=""
+        class="moon"
+      />
+      <img
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAixJREFUSEvV1kvoTVEUBvDfH2XglUjKwAiRDDxSpKTIY4CBhCIZKAxMDExI8poYyYQBJgrlkcREDCivIs+ixIAkJQyQsFftW9fp3HPP1XXLGp1ue69vr29931q3T4+jr8d4/ivAObiBn52w9LcVDsZnjMfzXgAOw0dMxLNuAQ7FPJwrSTgEnyoAp+At3hfvVlE6A7exHfsLFxuUllW4DsewEqc6AYyza3E8vXQzDjdd7pco3Zp/+9r0+1KcxW7sLKO6jmhW4QTmZlVGnkkJbFTu4/2cOAQU3wG2r1Vf6wDG3UVZHCOxJwHPb0p4PVljBx5iIU5WiaguYOSICqKnF3EQT1LyCdiC1ZiJR+0U2wngrVxliKIYhzALU7sFOA13MRavS5IOx4dc5Z1OKA1abiJU2IhlyRrfcD6JYWBFshdZmfGga4UcS3Ap7hYpDaDZSWn9c+Jf+QHhtwcYjXcloPGQL1k0ARb0NueImfujDLBKza9Sjy5kkRTP7cImjMH3TiitOhvWCFpOYxviAQGwNw+IFTjTLdFMzlROTyBHMtDjPADe5OrCjzEcotcto44tYoBfSWtoTZ6NA3KPYtaGchv9ib7Fd3iypfnbAYYdrmajR5+aY2OutnkBb0B4cjkul5VZBTgO9/IoO1C4PCirsmwBx8A/mukNi/0RVYAjkiUWtKCn3T5cnNbTU7zsBLCq9/9k41cB9vw/TTxmfd7sMY1qRzuV1k5U92DPAX8DJPZrHahMghsAAAAASUVORK5CYII="
+        alt=""
+        class="sun"
+      />
+      <div class="class-3">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAjFJREFUSEvV1kmoj1EYx/HPlWlFZomFLFhYWMjKlIgyrCiiiJQNK8qUhbJTlNlCybgRwoaUIiwl08IQMsu8QYbz6Ly6Xe9/uN23W/7137znnOd7nvP8nqFFJ/9aOpnnvwB2wzAMwls8xrdmX6pZD4dgFaZiDF5n0FDE2i1cxA48qgdvBIz1TViHG9iHM9mzwm5vzMYSTMI2rE3nfpaB6wG74gCmYynONfFsk3EE1zEf39ueqQc8jIW43cajRtzwOJ79RDo7D79aH6gF3ICV2NvIep31RTiaQ/J3WxlwAJ5iDs53ADgOlzAcrwo7ZcAtWI7dHYAVR0NIx7OI/nwrAz7EB3yqANgjhWVw9rIUODKp617Kp34p795VAAylf8RY3C3zcAZCnf0rgBUmArQeJ8uAkTvHKoQVpkLxO8uAU1IOncoKrYp7MFeqSJF/RDMqv3VfvK+AGDH8gmm4XAYM1T7DC3yuANgTo7MIv9ZKi12p+s9N7WdPBcDFua4uqJf40evuYxYudAAaleZq9jBSrWbix0K0pBWp1+3vADBqaaTCmtY2ahXvLrmhRru5gzftABfd4lqyMQE/mgHGnijipzEiFfNlqVqcbQI6Me0/lCeCaMov255p1PFD1puTtFfjZrpECCou0brs9cHM3PEDuB0ba805jYDFBUNIEYtQXS88T1PAE8RME/8o9uHZ1vy95mM0CywMdMf4XP0H5tg+SMPVlbJxoozaXmATYay/pdOBvwE19mAdMhLFwAAAAABJRU5ErkJggg=="
+          alt=""
+        />
+      </div>
+    </div>
+  </body>
+</html>

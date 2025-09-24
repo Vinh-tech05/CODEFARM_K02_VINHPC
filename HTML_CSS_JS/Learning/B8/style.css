@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@font-face {
+  font-family: "LOLfont";
+  src: url("./fonts/BeaufortforLOL-Bold.ttf");
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Thiết lập để khi nào cần gọi */
+:root {
+  --ff-primary: "LOLfont", serif;
+  --color-primary: #0e4c67;
+}
+
+/* Những thuộc tính chung mà để kh cần lặp đi lặp lại  */
+html {
+  font-family: var(--ff-primary);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+button,
+a {
+  transition: all 0.2s ease-in-out;
+}
+
+#banner {
+  width: 100%;
+}
+.logo {
+  margin: 32px auto;
+  width: 240px;
+  img {
+    width: 100%;
+  }
+}
+nav > ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 auto 62px;
+  gap: 20px;
+  a {
+    padding: 6px;
+  }
+  a:hover {
+    border-bottom: 1px solid var(--color-primary);
+    text-shadow: 0.13em 0.1em hsl(251, 20%, 39%);
+  }
+}
+#figure {
+  margin: 0 12px 60px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 32px;
+
+  .figure-item {
+    img {
+      width: 100%;
+    }
+  }
+}
+
+#content {
+  background-color: var(--color-primary);
+  padding: 28px;
+  p {
+    text-align: center;
+    /* padding: 28px; */
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.video {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+  }
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--color-primary);
+  padding: 24px 16px;
+  align-items: center;
+  p {
+    color: #fff;
+  }
+  form {
+    font-size: 16px;
+
+    input {
+      padding: 14px 24px;
+      background-color: transparent;
+      border: 2px solid #ffa800;
+      border-radius: 4px;
+      width: 278px;
+    }
+    input::placeholder {
+      color: #fff;
+    }
+
+    button {
+      background-color: #ffa800;
+      padding: 14px 24px;
+      font-size: 16px;
+      color: #fff;
+      border-radius: 4px;
+      font-weight: 800;
+      font-family: var(--ff-primary);
+    }
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  #figure {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .logo {
+    margin: 28px auto;
+    width: 180px;
+  }
+  nav > ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 auto 62px;
+    gap: 20px;
+    padding: 0 48px;
+  }
+  #figure {
+    margin: 0 12px 60px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #content {
+    p {
+      padding: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  footer {
+    flex-direction: column-reverse;
+    p {
+      color: #fff;
+      margin: 18px;
+    }
+  }
+}

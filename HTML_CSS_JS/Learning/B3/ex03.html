@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .main {
+      width: 100%;
+      position: relative;
+    }
+    .main1 {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      border-radius: 50%;
+      position: absolute;
+      left: 80px;
+    }
+    .main2 {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      border-radius: 50%;
+    }
+    .main3 {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: absolute;
+      transform: rotate(45deg);
+      left: 40px;
+      bottom: -40px;
+    }
+    .tree {
+      width: 100%;
+      height: 200px;
+      position: relative;
+    }
+    .item1 {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+      position: absolute;
+      left: 260px;
+      bottom: 130px;
+      border-radius: 50%;
+    }
+    .item2 {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+      position: absolute;
+      left: 200px;
+      top: 0;
+      border-radius: 50%;
+    }
+    .item3 {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+      position: absolute;
+      left: 330px;
+      top: 0px;
+      border-radius: 50%;
+    }
+    .item4 {
+      width: 100px;
+      height: 200px;
+      background-color: green;
+      position: absolute;
+      left: 240px;
+      top: 55px;
+      border-radius: 50%;
+    }
+    .item5 {
+      width: 100px;
+      height: 200px;
+      background-color: green;
+      position: absolute;
+      left: 290px;
+      top: 55px;
+      border-radius: 50%;
+    }
+    .item1::before {
+      content: "";
+      width: 100px;
+      height: 100px;
+      background-color: green;
+      position: absolute;
+      left: -50px;
+      top: -50px;
+      border-radius: 50%;
+    }
+    .item1::after {
+      content: "";
+      width: 100px;
+      height: 100px;
+      background-color: green;
+      position: absolute;
+      left: 50px;
+      top: -50px;
+      border-radius: 50%;
+    }
+    .item6 {
+      width: 40px;
+      height: 40px;
+      background-color: rgb(255, 255, 255);
+      position: absolute;
+      border-radius: 50%;
+      left: 250px;
+      top: 15px;
+    }
+    .item7 {
+      width: 40px;
+      height: 40px;
+      background-color: rgb(255, 255, 255);
+      position: absolute;
+      border-radius: 50%;
+      left: 340px;
+      top: 15px;
+    }
+    .item8 {
+      width: 20px;
+      height: 20px;
+      background-color: rgb(0, 0, 0);
+      position: absolute;
+      border-radius: 50%;
+      left: 270px;
+      top: 25px;
+    }
+    .item9 {
+      width: 20px;
+      height: 20px;
+      background-color: rgb(0, 0, 0);
+      position: absolute;
+      border-radius: 50%;
+      left: 340px;
+      top: 25px;
+    }
+  </style>
+  <body>
+    <div class="main">
+      <div class="main1"></div>
+      <div class="main2"></div>
+      <div class="main3"></div>
+    </div>
+    <div class="tree">
+      <div class="item1"></div>
+      <div class="item2"></div>
+      <div class="item3"></div>
+      <div class="item4"></div>
+      <div class="item5"></div>
+      <div class="item6"></div>
+      <div class="item7"></div>
+      <div class="item8"></div>
+      <div class="item9"></div>
+    </div>
+  </body>
+</html>
