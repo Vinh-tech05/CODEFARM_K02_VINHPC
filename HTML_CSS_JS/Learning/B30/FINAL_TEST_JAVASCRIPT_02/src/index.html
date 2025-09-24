@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giỏ hàng</title>
+  </head>
+  <link rel="stylesheet" href="main.css" />
+  <body>
+    <!-- Danh sách sản phẩm -->
+    <div>
+      <h1 style="text-align: center">Danh sách Sản phẩm</h1>
+      <br />
+      <hr />
+      <div id="productList" class="product-grid"></div>
+    </div>
+
+    <!-- Giỏ hàng -->
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        gap: 15;
+        align-items: center;
+      "
+      class="cart-list"
+    >
+      <h1>Giỏ hàng</h1>
+      <div class="cart-list" id="list-cart">
+        <!-- Giỏ hàng trống ban đầu -->
+      </div>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>

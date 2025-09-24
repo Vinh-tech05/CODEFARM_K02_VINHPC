@@ -1,0 +1,162 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  width: 1536px;
+  height: 1042px;
+  background-color: #f5f5f5;
+  /* margin-left: 250px; */
+}
+
+.flex-container {
+  display: flex;
+  max-width: 100%;
+  background-color: #ffffff;
+}
+.signup {
+  flex: 1;
+  margin: 202px 175px;
+  padding-bottom: 64px;
+}
+
+.signup h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.signup p {
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.signup input[type="text"],
+.signup input[type="email"],
+.signup input[type="password"] {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.checkbox input {
+  margin-right: 8px;
+}
+
+.checkbox a {
+  color: #333;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.signup-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #3d5a30;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+hr {
+  margin: 39.09px 0;
+  border: none;
+  padding-top: 32.08px;
+  border-top: 1px solid #ddd;
+}
+
+.signin-with {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: nowrap;
+}
+
+.signin {
+  flex: 1;
+}
+
+.google-button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.google-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.signup p:last-child {
+  text-align: center;
+  font-size: 14px;
+}
+#checkbox {
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.signup a {
+  color: #0f3dde;
+  font-size: 14px;
+  text-decoration: none;
+}
+.image-style {
+  width: 781.5px;
+  height: 1042px;
+  border-radius: 45px 0px 0px 45px;
+}
+
+.divider-line {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.divider-line::before,
+.divider-line::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: #eee;
+}
+
+.divider-line span {
+  padding: 0 12px;
+  font-size: 14px;
+  color: #000;
+  white-space: nowrap;
+}
