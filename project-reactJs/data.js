@@ -28,3 +28,9 @@ export const students = [
     gender: "other",
   },
 ];
+
+export const product = [
+  { id: 1, name: " a", price: 200 },
+  { id: 2, name: " b", price: 300 },
+  { id: 3, name: " c", price: 400 },
+];
