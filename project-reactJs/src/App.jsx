@@ -1,68 +1,82 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./Header";
-import ProductList from "./ProductList";
+// import ProductList from "./ProductList";
 import Footer from "./Footer";
-import { students } from "../data";
-import { product } from "../data";
+// import { students } from "../data";
+// import { product } from "../data";
 
 const App = () => {
-  // const [count, setCount] = useState(0);
-  // function increment() {
-  //   setCount((count) => count + 1);
-  //   console.log(count);
-  // }
+  const [products, setProducts] = useState([]);
+  const [metaData, setMetaData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchValue, setSearchValue] = useState("");
+  useEffect(() => {
+    fetch(
+      `https://api-class-o1lo.onrender.com/api/example/products?${
+        searchValue && `q=${searchValue}`
+      }&_limit=10&_page=${currentPage}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data.data);
+        setMetaData(data.meta);
+      });
+  }, [searchValue, currentPage]);
 
-  const [cart, setCart] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [count, setCount] = useState(0);
-  function handleAddToCart(product) {
-    // setCount((count) => count + 1);
-    // console.log(count);
-    let checkProduct = cart.find((item) => item.id === product.id);
-    // console.log(checkProduct);
-
-    if (checkProduct) {
-      const newCart = cart.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      setCart(newCart);
-      localStorage.setItem("cart", JSON.stringify(newCart));
-    } else {
-      const newCart = [...cart, { ...product, quantity: 1 }];
-      setCart(newCart);
-      localStorage.setItem("cart", JSON.stringify(newCart));
-    }
-
-    const totalPrice = newCart.reduce((acc, cur) => {
-      return (acc += cur.price * cur.quantity);
-    });
-  }
-  // const student = students;
+  // Phân trang dữ liệu và chọn được limit xây dựng tìm kiếm
   return (
     <>
-      {/* <Header />
-      <ProductList student={student} />
-      <Footer /> */}
-      {/* <button onClick={() => console.log("helloJSX")}>Click Me</button>
-      <button onClick={increment}>Click Count</button>
-      <p>{count}</p> */}
-
-      <h1>Danh sách sản phẩm</h1>
-      <p>Giỏ hàng {}</p>
       <div>
-        {product.map((item) => (
-          <div key={item.id}>
-            <h3>{item.name}</h3>
-            <p>{item.price}</p>
-            <button onClick={() => handleAddToCart(item)}>
-              Thêm vào giỏ hàng
-            </button>
-          </div>
-        ))}
+        <input
+          type="text"
+          placeholder="Tim kiem..."
+          onKeyDown={(e) => {
+            if (e.code === "Enter") {
+              setSearchValue(e.target.value);
+            }
+          }}
+        />
+        <button>Tim kiem</button>
       </div>
+      <h1>Learning useEffect</h1>
+      <div id="productList">
+        {products.length > 0
+          ? products.map((item) => (
+              <div key={item.id}>
+                <h2>{item.title}</h2>
+                <p>{item.price}</p>
+                <p>{item.description}</p>
+                <button>Mua ngay</button>
+              </div>
+            ))
+          : "dang tai du lieu..."}
+      </div>
+      {metaData && (
+        <div
+          style={{
+            marginTop: 15,
+            display: "flex",
+            alignItems: "center",
+            gap: 5,
+          }}
+        >
+          {Array.from({ length: metaData.totalPages }).map((_, index) => (
+            <button
+              onClick={() => setCurrentPage(index + 1)}
+              style={{
+                background: `${index + 1 === currentPage ? "pink" : ""}`,
+              }}
+              key={index}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      )}
     </>
   );
 };
+
 export default App;
 
 /**
