@@ -1,48 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import {
+  getStatus,
+  getValidDate,
+  normalizePriority,
+  getPriorityColor,
+  getStatusColor,
+  formatDateVN,
+} from "../utils/todoUtils";
 
 const TodoItem = ({ item }) => {
-  // ✅ Chuẩn hóa ngày tháng (fix lỗi có '012' trong ngày)
-  const getValidDate = (dateStr) => {
-    if (!dateStr) return null;
-    const fixed = dateStr.replace(/(\d{4}-\d{2}-)0*(\d{2})T/, "$1$2T");
-    const d = new Date(fixed);
-    return isNaN(d.getTime()) ? null : d;
-  };
-
-  const dueDate = getValidDate(item.dueDate);
-  const today = new Date();
-
-  const getStatus = () => {
-    if (item.completed) return "Hoàn thành";
-    if (!dueDate) return "Không xác định";
-    return dueDate < today ? "Quá hạn" : "Đang thực hiện";
-  };
-
-  const normalizePriority = (priority) => {
-    if (typeof priority === "object" && priority !== null) {
-      return {
-        level: priority.level ?? 1,
-        label: priority.label ?? "low",
-      };
-    }
-    const mapping = {
-      1: { level: 1, label: "Thấp" },
-      2: { level: 2, label: "Trung bình" },
-      3: { level: 3, label: "Cao" },
-    };
-    return mapping[priority] || { level: 1, label: "Thấp" };
-  };
-
+  const status = getStatus(item);
   const { level, label } = normalizePriority(item.priority);
+  const dueDate = getValidDate(item.dueDate);
 
-  const priorityColor = level === 3 ? "red" : level === 2 ? "orange" : "green";
-
-  const status = getStatus();
-  const bgColor = status.includes("Hoàn thành")
-    ? "#e6ffe6"
-    : status.includes("Quá hạn")
-    ? "#ffe6e6"
-    : "#fff";
+  const priorityColor = getPriorityColor(level);
+  const badgeColor = getStatusColor(status);
+  const deadline = formatDateVN(dueDate);
 
   return (
     <div
@@ -51,7 +25,7 @@ const TodoItem = ({ item }) => {
         borderRadius: 10,
         padding: 15,
         boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-        background: bgColor,
+        background: "#fff",
         position: "relative",
       }}
     >
@@ -62,11 +36,7 @@ const TodoItem = ({ item }) => {
           top: 8,
           right: 8,
           fontSize: 12,
-          background: status.includes("Hoàn thành")
-            ? "#4caf50"
-            : status.includes("Quá hạn")
-            ? "#f44336"
-            : "#ff9800",
+          background: badgeColor,
           color: "#fff",
           padding: "2px 8px",
           borderRadius: 5,
@@ -77,14 +47,28 @@ const TodoItem = ({ item }) => {
 
       <h3 style={{ marginBottom: 8 }}>{item.name}</h3>
       <p style={{ fontSize: 14, color: "#555" }}>{item.description}</p>
+
       <p style={{ marginTop: 8 }}>
         <strong>Ưu tiên:</strong>{" "}
         <span style={{ color: priorityColor }}>{label}</span>
       </p>
+
       <p>
-        <strong>Hạn chót:</strong>{" "}
-        {dueDate ? dueDate.toLocaleDateString("vi-VN") : "Không hợp lệ"}
+        <strong>Hạn chót:</strong> {deadline}
       </p>
+
+      <Link
+        to={`/todos/${item._id}`}
+        style={{
+          display: "inline-block",
+          marginTop: 10,
+          color: "#1976d2",
+          textDecoration: "none",
+          fontWeight: "bold",
+        }}
+      >
+        Xem Chi Tiết
+      </Link>
     </div>
   );
 };

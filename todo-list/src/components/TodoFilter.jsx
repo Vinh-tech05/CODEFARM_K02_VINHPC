@@ -3,6 +3,19 @@ import React, { useState } from "react";
 const TodoFilter = ({ query, setQuery }) => {
   const [search, setSearch] = useState(query.q || "");
 
+  const handleReset = () => {
+    setSearch("");
+    setQuery({
+      _page: 1,
+      _limit: 8,
+      _sort: "priority",
+      _order: "desc",
+      q: "",
+      priority: "",
+      status: "",
+    });
+  };
+
   return (
     <div
       style={{
@@ -13,7 +26,7 @@ const TodoFilter = ({ query, setQuery }) => {
         gap: 10,
       }}
     >
-      {/* Tìm kiếm */}
+      {/*  Tìm kiếm */}
       <div style={{ display: "flex", gap: 10 }}>
         <input
           type="text"
@@ -42,12 +55,14 @@ const TodoFilter = ({ query, setQuery }) => {
       </div>
 
       {/* Bộ lọc */}
-      <div style={{ display: "flex", gap: 10 }}>
+      <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+        {/* Ưu tiên */}
         <select
+          value={query.priority || ""}
           onChange={(e) =>
             setQuery((prev) => ({
               ...prev,
-              priority: e.target.value || "",
+              priority: e.target.value,
               _page: 1,
             }))
           }
@@ -59,7 +74,27 @@ const TodoFilter = ({ query, setQuery }) => {
           <option value="3">Ưu tiên cao</option>
         </select>
 
+        {/* Trạng thái */}
         <select
+          value={query.status || ""}
+          onChange={(e) =>
+            setQuery((prev) => ({
+              ...prev,
+              status: e.target.value,
+              _page: 1,
+            }))
+          }
+          style={{ padding: "6px 10px" }}
+        >
+          <option value="">Tất cả trạng thái</option>
+          <option value="doing">Đang thực hiện</option>
+          <option value="completed">Hoàn thành</option>
+          <option value="overdue">Quá hạn</option>
+        </select>
+
+        {/* Sắp xếp */}
+        <select
+          value={query._order || ""}
           onChange={(e) =>
             setQuery((prev) => ({
               ...prev,
@@ -73,6 +108,23 @@ const TodoFilter = ({ query, setQuery }) => {
           <option value="asc">Ưu tiên tăng dần</option>
           <option value="desc">Ưu tiên giảm dần</option>
         </select>
+
+        {/* Làm mới bộ lọc */}
+        {(query.q || query.priority || query.status) && (
+          <button
+            onClick={handleReset}
+            style={{
+              padding: "6px 10px",
+              background: "#6c757d",
+              color: "#fff",
+              border: "none",
+              borderRadius: 5,
+              cursor: "pointer",
+            }}
+          >
+            Làm mới
+          </button>
+        )}
       </div>
     </div>
   );
