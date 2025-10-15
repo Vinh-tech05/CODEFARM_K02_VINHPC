@@ -38,9 +38,11 @@ const TodoPage = () => {
           )
           .map(([k, v]) => `${k}=${v}`)
           .join("&");
+
         const url = `https://api-class-o1lo.onrender.com/api/v1/todos?${params}`;
         const res = await fetch(url);
         const data = await res.json();
+
         let todosData = data.data || [];
 
         if (query.status) {
@@ -49,9 +51,16 @@ const TodoPage = () => {
           );
         }
 
+        const start = (query._page - 1) * query._limit;
+        const paginated = todosData.slice(start, start + query._limit);
+
         setTodos(todosData);
-        setFilteredTodos(todosData);
-        setMeta(data.meta || null);
+        setFilteredTodos(paginated);
+        setMeta({
+          totalItems: todosData.length,
+          totalPages: Math.ceil(todosData.length / query._limit),
+          currentPage: query._page,
+        });
       } catch (error) {
         console.error("Lỗi tải dữ liệu:", error);
       }
