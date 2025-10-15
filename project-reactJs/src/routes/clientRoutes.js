@@ -1,9 +1,9 @@
 import LayoutClient from "../layouts/LayoutClient";
-import AboutPage from "../pages/AboutPage";
-import ContactPage from "../pages/ContactPage";
-import HomePage from "../pages/HomePage";
-import ProductDetailPage from "../pages/ProductDetailPage";
-import ShopPage from "../pages/ShopPage";
+import AboutPage from "../pages/client/AboutPage";
+import ContactPage from "../pages/client/ContactPage";
+import HomePage from "../pages/client/HomePage";
+import ProductDetailPage from "../pages/client/ProductDetailPage";
+import ShopPage from "../pages/client/ShopPage";
 
 const clientRoutes = [
   {
