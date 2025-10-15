@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   getStatus,
   getValidDate,
@@ -10,6 +10,8 @@ import {
 } from "../utils/todoUtils";
 
 const TodoItem = ({ item }) => {
+  const location = useLocation(); // 👉 lấy đường dẫn hiện tại
+
   const status = getStatus(item);
   const { level, label } = normalizePriority(item.priority);
   const dueDate = getValidDate(item.dueDate);
@@ -59,6 +61,7 @@ const TodoItem = ({ item }) => {
 
       <Link
         to={`/todos/${item._id}`}
+        state={{ from: location.pathname }}
         style={{
           display: "inline-block",
           marginTop: 10,
