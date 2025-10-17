@@ -10,7 +10,7 @@ import {
 } from "../utils/todoUtils";
 
 const TodoItem = ({ item }) => {
-  const location = useLocation(); // 👉 lấy đường dẫn hiện tại
+  const location = useLocation();
 
   const status = getStatus(item);
   const { level, label } = normalizePriority(item.priority);

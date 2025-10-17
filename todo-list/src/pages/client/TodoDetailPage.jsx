@@ -19,7 +19,7 @@ const TodoDetailPage = () => {
     const fetchTodoItem = async () => {
       try {
         const res = await fetch(
-          `https://api-class-o1lo.onrender.com/api/v1/todos/${id}`
+          `https://api-class-o1lo.onrender.com/api/vinh/todos/${id}`
         );
         const { data } = await res.json();
         setTodo(data);

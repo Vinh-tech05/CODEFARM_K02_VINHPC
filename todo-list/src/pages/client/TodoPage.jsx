@@ -39,7 +39,7 @@ const TodoPage = () => {
           .map(([k, v]) => `${k}=${v}`)
           .join("&");
 
-        const url = `https://api-class-o1lo.onrender.com/api/v1/todos?${params}`;
+        const url = `https://api-class-o1lo.onrender.com/api/vinh/todos?${params}`;
         const res = await fetch(url);
         const data = await res.json();
 

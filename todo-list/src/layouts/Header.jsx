@@ -36,6 +36,14 @@ const Header = () => {
                 Important
               </Link>
             </li>
+            <li>
+              <Link
+                to="/admin/todos"
+                className="hover:text-yellow-300 transition-colors duration-200"
+              >
+                Admin
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
