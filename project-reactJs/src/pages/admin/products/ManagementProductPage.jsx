@@ -35,7 +35,7 @@ const ManagementProductPage = () => {
               <td>{item.price}</td>
               <td>{item.description}</td>
               <td>DELETE</td>
-              <td>UPDATE</td>
+              <Link to={`/admin/products/update/${item._id}`}>Update</Link>
             </tr>
           ))}
         </tbody>

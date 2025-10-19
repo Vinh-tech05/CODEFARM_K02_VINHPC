@@ -7,7 +7,6 @@ import api from "../../../api";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 
-// ...existing code...
 const ProductFormRHF = () => {
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
@@ -32,15 +31,12 @@ const ProductFormRHF = () => {
     resolver: zodResolver(productSchema),
     defaultValues: { title: "", price: 0, description: "" },
   });
-
-  // Nếu có id => load dữ liệu để chỉnh sửa
   useEffect(() => {
     if (!id) return;
     (async () => {
       try {
         const res = await api.get(`/products/${id}`);
         const payload = res.data?.data ?? res.data ?? res;
-        // đảm bảo price là number
         const ready = {
           title: payload.title ?? "",
           price: Number(payload.price ?? 0),
@@ -58,15 +54,15 @@ const ProductFormRHF = () => {
       setLoading(true);
       if (id) {
         await updateProduct(id, data);
-        toast.success("Cập nhật thành công!");
+        toast.success("OK");
       } else {
         await createProduct(data);
-        toast.success("Thêm thành công!");
-        reset(); // clear form sau khi thêm
+        toast.success("Thêm OK");
+        reset();
       }
       navigate("/admin/products");
     } catch (error) {
-      toast.error("Thao tác thất bại!");
+      toast.error("Lỗi rồi");
     } finally {
       setLoading(false);
     }
