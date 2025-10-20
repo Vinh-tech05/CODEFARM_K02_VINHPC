@@ -10,7 +10,7 @@ const clientRoutes = [
     path: "/",
     Component: LayoutClient,
     children: [
-      { index: true, element: <Navigate to={"/todos"} /> },
+      { index: true, element: <Navigate to={"/auth/login"} /> },
       { path: "todos", Component: TodoPage },
       // Dynamic route
       { path: "todos/:id", Component: TodoDetailPage },
