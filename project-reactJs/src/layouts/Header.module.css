@@ -1,0 +1,13 @@
+.nav {
+  gap: 12px;
+  li {
+    list-style-type: none;
+    a {
+      padding: 12px;
+      text-decoration: none;
+    }
+    a:hover {
+      color: rebeccapurple;
+    }
+  }
+}
