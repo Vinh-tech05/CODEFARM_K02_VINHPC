@@ -1,0 +1,103 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Product A",
+      "price": 220,
+      "description": "This is product A",
+      "thumbnail": "https://picsum.photos/200/300.webp",
+      "stock": 100,
+      "categoryId": 1
+    },
+    {
+      "id": 2,
+      "title": "Product B",
+      "price": 180,
+      "description": "This is product B",
+      "thumbnail": "https://picsum.photos/200/300.webp",
+      "stock": 100,
+      "categoryId": 1
+    },
+    {
+      "id": 3,
+      "title": "Product C",
+      "price": 120,
+      "description": "This is product C",
+      "thumbnail": "https://picsum.photos/200/300.webp",
+      "stock": 100,
+      "categoryId": 2
+    },
+    {
+      "id": 4,
+      "title": "Product D",
+      "price": 150,
+      "description": "This is product D",
+      "thumbnail": "https://picsum.photos/200/300.webp",
+      "stock": 100,
+      "categoryId": 2
+    },
+    {
+      "id": 5,
+      "title": "Product E",
+      "price": 200,
+      "description": "This is product E",
+      "thumbnail": "https://picsum.photos/200/300.webp",
+      "stock": 100,
+      "categoryId": 3
+    },
+    {
+      "id": 6,
+      "title": "Product F",
+      "price": 250,
+      "description": "This is product F",
+      "thumbnail": "https://picsum.photos/200/300.webp",
+      "stock": 100,
+      "categoryId": 3
+    },
+    {
+      "title": "SP nhé",
+      "price": 150000,
+      "categoryId": 2,
+      "description": "xcxscđscds",
+      "thumbnail": "",
+      "stock": 10,
+      "id": 7
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "title": "Technology",
+      "slug": "technology"
+    },
+    {
+      "id": 2,
+      "title": "Clothing",
+      "slug": "clothing"
+    },
+    {
+      "id": 3,
+      "title": "Others",
+      "slug": "others"
+    },
+    {
+      "title": "Danh mục 1",
+      "slug": "danhmuc1",
+      "id": 4
+    }
+  ],
+  "users": [
+    {
+      "email": "test@gmail.com",
+      "password": "$2a$10$iLvWxssD1Tx39fhCR0MHs.VJMlNZbB73qu4kjn5NChqLW2iCaM6la",
+      "role": "admin",
+      "id": 1
+    },
+    {
+      "email": "phi@gmail.com",
+      "password": "$2a$10$pebtYt6LAjwbSUXmZvPX8uX6amro.rjwuYhbQ/uJp3DNtHmK.UESq",
+      "role": "member",
+      "id": 2
+    }
+  ]
+}
