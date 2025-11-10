@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "email": "test@gmail.com",
+      "password": "$2a$10$fFuZXJrgZwtPsBeSShkUluIyL7bYyQlT/SbIe2WbFFyll1LBi54Qu",
+      "id": 1
+    },
+    {
+      "email": "phi@gmail.com",
+      "password": "$2a$10$yVTMpXqpl26MWFfbw9cziOcHITA9EvTsqQJ4SnVx5xO.gUvy3moWe",
+      "id": 2
+    },
+    {
+      "email": "phi@gmail1.com",
+      "password": "$2a$10$byOdznv88ZJdD7q8dqGlp.X71ICjK6K/pYQ.TA2WxuC7A2Rhl/pQi",
+      "id": 3
+    }
+  ],
+  "products": []
+}
