@@ -1,104 +1,113 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { createTodo, updateTodo, getTodoDetail } from "../../../api/apiTodo";
-import { getValidDate } from "../../../utils/todoUtils";
+import {
+  createTodoApi,
+  getTodoDetailApi,
+  updateTodoApi,
+} from "../../../api/apiTodo.js";
+import type { AppDispatch, RootState } from "../../../store/index.js";
+import {
+  setEditingTodo,
+  addTodo,
+  updateTodo,
+} from "../../../features/todoSlice.js";
 
-const validateFields = (data) => {
-  if (!data.name.trim()) {
-    alert("Tên công việc không được để trống");
-    return true;
-  }
-  if (data.name.length < 3 || data.name.length > 80) {
-    alert("Tên công việc phải từ 3 đến 80 ký tự");
-    return true;
-  }
-  if (!data.dueDate) {
-    alert("Vui lòng chọn hạn chót hoàn thành");
-    return true;
-  }
-  return false;
+type Checked = {
+  checked: boolean;
 };
 
 const FormTodo = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const [formData, setFormData] = useState({
-    name: "",
-    priority: 1,
-    description: "",
-    dueDate: "",
-    completed: false,
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false); // state ngăn submit nhiều lần
+  const editingTodo = useSelector(
+    (state: RootState) => state.todos.editingTodo
+  );
 
   useEffect(() => {
     if (id) {
       (async () => {
-        try {
-          const { data } = await getTodoDetail(id);
-          const validDate = getValidDate(data.dueDate);
-          const formattedDate = validDate
-            ? validDate.toISOString().split("T")[0]
-            : "";
-
-          setFormData({
-            ...data,
-            dueDate: formattedDate,
-          });
-        } catch (error) {
-          console.error("Lỗi khi lấy chi tiết công việc:", error);
-        }
+        const todo = await getTodoDetailApi(id);
+        dispatch(setEditingTodo(todo));
       })();
+    } else {
+      dispatch(
+        setEditingTodo({
+          name: "",
+          priority: 1,
+          description: "",
+          dueDate: "",
+          completed: false,
+        })
+      );
     }
   }, [id]);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value, type, checked: Checked } = e.target;
 
-    let newValue = value;
-    if (name === "priority") newValue = Number(value);
-    if (type === "checkbox") newValue = checked;
-
-    setFormData({
-      ...formData,
-      [name]: newValue,
-    });
+    dispatch(
+      setEditingTodo({
+        ...editingTodo!,
+        [name]:
+          type === "checkbox"
+            ? checked
+            : name === "priority"
+            ? Number(value)
+            : value,
+      })
+    );
   };
-
-  const handleReset = () => {
-    setFormData({
-      name: "",
-      priority: 1,
-      description: "",
-      dueDate: "",
-      completed: false,
-    });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateFields(formData)) return;
 
-    if (isSubmitting) return;
-
-    setIsSubmitting(true);
-    try {
-      if (!id) {
-        await createTodo(formData);
-        alert("Thêm công việc thành công!");
-      } else {
-        await updateTodo(id, formData);
-        alert("Cập nhật công việc thành công!");
-      }
-      navigate("/admin/todos");
-    } catch (error) {
-      console.error(error);
-      alert("Có lỗi xảy ra!");
-    } finally {
-      setIsSubmitting(false);
+    if (!editingTodo?.name.trim()) {
+      alert("Tên công việc không được để trống");
+      return;
     }
+
+    if (!editingTodo.dueDate) {
+      alert("Vui lòng chọn hạn chót");
+      return;
+    }
+
+    if (!id) {
+      const newTodo = await createTodoApi({
+        name: editingTodo.name,
+        priority: editingTodo.priority,
+        description: editingTodo.description,
+        dueDate: editingTodo.dueDate,
+        completed: false,
+      });
+
+      dispatch(addTodo(newTodo));
+      alert("Thêm thành công");
+    } else {
+      const updated = await updateTodoApi(id, editingTodo);
+      dispatch(updateTodo(updated));
+      alert("Cập nhật thành công");
+    }
+
+    navigate("/admin/todos");
+  };
+
+  if (!editingTodo) return null;
+  const handleReset = () => {
+    dispatch(
+      setEditingTodo({
+        name: "",
+        priority: 1,
+        description: "",
+        dueDate: "",
+        completed: false,
+      })
+    );
   };
 
   return (
@@ -108,6 +117,7 @@ const FormTodo = () => {
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-5">
+        {/* NAME */}
         <div>
           <label className="block text-gray-700 font-semibold mb-2">
             Tên công việc
@@ -115,20 +125,21 @@ const FormTodo = () => {
           <input
             type="text"
             name="name"
-            value={formData.name}
+            value={editingTodo.name}
             onChange={handleChange}
             placeholder="Nhập tên công việc"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
           />
         </div>
 
+        {/* PRIORITY */}
         <div>
           <label className="block text-gray-700 font-semibold mb-2">
             Mức độ ưu tiên
           </label>
           <select
             name="priority"
-            value={formData.priority}
+            value={editingTodo.priority}
             onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
           >
@@ -138,6 +149,7 @@ const FormTodo = () => {
           </select>
         </div>
 
+        {/* DUE DATE */}
         <div>
           <label className="block text-gray-700 font-semibold mb-2">
             Hạn chót hoàn thành
@@ -145,32 +157,32 @@ const FormTodo = () => {
           <input
             type="date"
             name="dueDate"
-            value={formData.dueDate}
+            value={editingTodo.dueDate}
             onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
           />
         </div>
 
+        {/* DESCRIPTION */}
         <div>
           <label className="block text-gray-700 font-semibold mb-2">
             Mô tả công việc
           </label>
           <textarea
             name="description"
-            value={formData.description}
+            value={editingTodo.description}
             onChange={handleChange}
-            placeholder="Nhập mô tả công việc (tùy chọn)"
+            placeholder="Nhập mô tả công việc"
             rows={3}
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
           />
         </div>
-
         {id && (
           <div className="flex items-center gap-2">
             <input
               type="checkbox"
               name="completed"
-              checked={formData.completed}
+              checked={editingTodo.completed}
               onChange={handleChange}
               className="w-5 h-5 accent-green-500"
             />
@@ -178,6 +190,7 @@ const FormTodo = () => {
           </div>
         )}
 
+        {/* BUTTONS */}
         <div className="flex justify-end gap-3 mt-6">
           {!id && (
             <button
@@ -199,8 +212,7 @@ const FormTodo = () => {
 
           <button
             type="submit"
-            disabled={isSubmitting}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition disabled:opacity-50"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition"
           >
             {id ? "Cập nhật" : "Tạo mới"}
           </button>

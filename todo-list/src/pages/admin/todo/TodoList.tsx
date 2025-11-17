@@ -1,35 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getTodos, removeTodo } from "../../../api/apiTodo";
+import {
+  fetchTodos,
+  removeTodoAsync,
+  toggleCompletedAsync,
+} from "../../../features/todoActions.js";
+import type { AppDispatch, RootState } from "../../../store/index.js";
 import {
   formatDateVN,
   getPriorityColor,
   getStatus,
   getStatusColor,
-} from "../../../utils/todoUtils";
+} from "../../../utils/todoUtils.js";
 
 const TodoList = () => {
-  const [todos, setTodos] = useState([]);
-
-  const fetchTodos = async () => {
-    try {
-      const { data } = await getTodos();
-      setTodos(data);
-    } catch (error) {
-      console.error("Lỗi khi tải danh sách công việc:", error);
-    }
-  };
+  const dispath = useDispatch<AppDispatch>();
+  const todos = useSelector((state: RootState) => state.todos.todos || []);
 
   useEffect(() => {
-    fetchTodos();
+    dispath(fetchTodos());
   }, []);
 
-  const handleRemove = async (id) => {
+  const handleRemove = async (_id: string) => {
     if (!confirm("Bạn có chắc muốn xóa công việc này không?")) return;
     try {
-      await removeTodo(id);
+      await dispath(removeTodoAsync(_id));
       alert("Xóa thành công!");
-      fetchTodos();
     } catch (error) {
       console.error("Lỗi khi xóa công việc:", error);
     }
@@ -65,28 +62,34 @@ const TodoList = () => {
             {todos.length === 0 ? (
               <tr>
                 <td
-                  colSpan="6"
+                  colSpan={6}
                   className="text-center py-6 text-gray-500 italic"
                 >
                   Không có công việc nào
                 </td>
               </tr>
             ) : (
-              todos.map((item) => {
-                const status = getStatus(item);
+              todos.map((todo) => {
+                const status = getStatus(todo);
+
                 return (
                   <tr
-                    key={item._id}
-                    className="border-b hover:bg-gray-50 transition"
+                    key={todo._id}
+                    onClick={() =>
+                      dispath(toggleCompletedAsync(todo._id, !todo.completed))
+                    }
+                    className={`border-b hover:bg-gray-50 transition cursor-pointer ${
+                      todo.completed ? "line-through opacity-50" : ""
+                    }`}
                   >
-                    <td className="px-4 py-2 font-medium">{item.name}</td>
+                    <td className="px-4 py-2 font-medium">{todo.name}</td>
                     <td
                       className="px-4 py-2 font-semibold"
-                      style={{ color: getPriorityColor(item.priority) }}
+                      style={{ color: getPriorityColor(todo.priority) }}
                     >
-                      {item.priority === 1
+                      {todo.priority === 1
                         ? "Thấp"
-                        : item.priority === 2
+                        : todo.priority === 2
                         ? "Trung bình"
                         : "Cao"}
                     </td>
@@ -96,19 +99,22 @@ const TodoList = () => {
                     >
                       {status}
                     </td>
-                    <td className="px-4 py-2">{formatDateVN(item.dueDate)}</td>
+                    <td className="px-4 py-2">{formatDateVN(todo.dueDate)}</td>
                     <td className="px-4 py-2 truncate max-w-xs">
-                      {item.description || "—"}
+                      {todo.description || "—"}
                     </td>
                     <td className="px-4 py-2 text-center flex justify-center gap-2">
                       <Link
-                        to={`/admin/todos/update/${item._id}`}
+                        to={`/admin/todos/update/${todo._id}`}
                         className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm transition"
                       >
                         Sửa
                       </Link>
                       <button
-                        onClick={() => handleRemove(item._id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRemove(todo._id);
+                        }}
                         className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm transition"
                       >
                         Xóa

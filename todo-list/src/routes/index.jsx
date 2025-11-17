@@ -1,9 +1,8 @@
-import { Component } from "react";
-import clientRoutes from "./clientRoutes";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import NotFoundPage from "../pages/client/NotFoundPage";
 import adminRoutes from "./adminroutes";
 import authRoutes from "./authRoutes";
+import clientRoutes from "./clientRoutes";
 
 let router = createBrowserRouter([
   ...clientRoutes,

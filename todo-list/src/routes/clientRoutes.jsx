@@ -1,5 +1,5 @@
 import React from "react";
-import LayoutClient from "../layouts/LayoutClient";
+import LayoutClient from "../layouts/LayoutClient.js";
 import ImportantPage from "../pages/client/ImportantPage";
 import TodoPage from "../pages/client/TodoPage";
 import TodoDetailPage from "../pages/client/TodoDetailPage";

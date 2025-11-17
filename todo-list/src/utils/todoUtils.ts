@@ -1,5 +1,5 @@
 //! Xử lý ngày tháng
-export const getValidDate = (dateStr) => {
+export const getValidDate = (dateStr: any) => {
   if (!dateStr) return null;
   const fixed = dateStr.replace(/(\d{4}-\d{2}-)0*(\d{2})T/, "$1$2T");
   const d = new Date(fixed);
@@ -7,7 +7,7 @@ export const getValidDate = (dateStr) => {
 };
 
 //! Xử lý ưu tiên
-export const normalizePriority = (priority) => {
+export const normalizePriority = (priority: any) => {
   if (typeof priority === "object" && priority !== null) {
     return {
       level: priority.level ?? 1,
@@ -23,7 +23,7 @@ export const normalizePriority = (priority) => {
 };
 
 //! Xử lý trạng thái công việc
-export const getStatus = (item) => {
+export const getStatus = (item: any) => {
   const dueDate = getValidDate(item.dueDate);
   const today = new Date();
 
@@ -33,7 +33,7 @@ export const getStatus = (item) => {
 };
 
 //! Xử lý màu theo mức độ ưu tiên
-export const getPriorityColor = (level) => {
+export const getPriorityColor = (level: any) => {
   switch (level) {
     case 3:
       return "red";
@@ -45,12 +45,12 @@ export const getPriorityColor = (level) => {
 };
 
 //! Xử lý màu sắc theop trạng thái
-export const getStatusColor = (status) => {
+export const getStatusColor = (status: any) => {
   if (status.includes("Hoàn thành")) return "#4caf50";
   if (status.includes("Quá hạn")) return "#f44336";
   return "#ff9800";
 };
 
 //? Định dạng ngày theo kiểu Việt Nam
-export const formatDateVN = (date) =>
+export const formatDateVN = (date: Date) =>
   date ? new Date(date).toLocaleDateString("vi-VN") : "Không hợp lệ";

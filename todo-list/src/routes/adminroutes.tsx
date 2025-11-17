@@ -1,7 +1,7 @@
-import TodoList from "../pages/admin/todo/TodoList";
-import FormTodo from "../pages/admin/todo/FormTodo";
-import LayoutAdmin from "../layouts/LayoutAdmin";
-import PrivateRoute from "./protectedRoutes/PrivateRoute";
+import TodoList from "../pages/admin/todo/TodoList.js";
+import FormTodo from "../pages/admin/todo/FormTodo.js";
+import LayoutAdmin from "../layouts/LayoutAdmin.js";
+import PrivateRoute from "./protectedRoutes/PrivateRoute.js";
 
 const adminRoutes = [
   {
