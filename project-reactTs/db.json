@@ -16,5 +16,7 @@
       "id": 3
     }
   ],
-  "products": []
+  "products": [
+    { "id": 1, "title": "SP1", "price": 4000, "description": "mô tả" }
+  ]
 }
