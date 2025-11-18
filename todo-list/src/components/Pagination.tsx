@@ -1,6 +1,12 @@
-import React from "react";
+interface PaginationProps {
+  meta: {
+    totalPages: number;
+    currentPage: number;
+  };
+  onPageChange: (page: number) => void;
+}
 
-const Pagination = ({ meta, onPageChange }) => {
+const Pagination = ({ meta, onPageChange }: PaginationProps) => {
   if (!meta || meta.totalPages <= 1) return null;
 
   const { currentPage, totalPages } = meta;

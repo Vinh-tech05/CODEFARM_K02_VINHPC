@@ -1,13 +1,30 @@
 import React, { useEffect, useState } from "react";
-import TodoList from "../../components/TodoList";
-import TodoFilter from "../../components/TodoFilter";
-import Pagination from "../../components/Pagination";
+import TodoList from "../../components/TodoList.js";
+import TodoFilter from "../../components/TodoFilter.js";
+import Pagination from "../../components/Pagination.js";
+import type { Todo } from "../../types/todoType.js";
 
-const TodoPage = () => {
-  const [todos, setTodos] = useState([]);
-  const [filteredTodos, setFilteredTodos] = useState([]);
-  const [meta, setMeta] = useState(null);
-  const [query, setQuery] = useState({
+interface Query {
+  _page: number;
+  _limit: number;
+  _sort: string;
+  _order: "asc" | "desc" | "";
+  q: string;
+  priority: string;
+  status: string;
+}
+
+interface Meta {
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+}
+
+const TodoPage: React.FC = () => {
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [filteredTodos, setFilteredTodos] = useState<Todo[]>([]);
+  const [meta, setMeta] = useState<Meta | null>(null);
+  const [query, setQuery] = useState<Query>({
     _page: 1,
     _limit: 6,
     _sort: "priority",
@@ -17,7 +34,9 @@ const TodoPage = () => {
     status: "",
   });
 
-  const getStatus = (item) => {
+  const getStatus = (
+    item: Todo
+  ): "completed" | "overdue" | "doing" | "unknown" => {
     const today = new Date();
     const due = item.dueDate ? new Date(item.dueDate) : null;
     if (item.completed) return "completed";
@@ -43,7 +62,7 @@ const TodoPage = () => {
         const res = await fetch(url);
         const data = await res.json();
 
-        let todosData = data.data || [];
+        let todosData: Todo[] = data.data || [];
 
         if (query.status) {
           todosData = todosData.filter(

@@ -7,9 +7,13 @@ import {
   getPriorityColor,
   getStatusColor,
   formatDateVN,
-} from "../utils/todoUtils";
+} from "../utils/todoUtils.js";
+import type { Todo } from "../types/todoType.js";
+interface TodoItemProps {
+  item: Todo;
+}
 
-const TodoItem = ({ item }) => {
+const TodoItem: React.FC<TodoItemProps> = ({ item }) => {
   const location = useLocation();
 
   const status = getStatus(item);
@@ -18,7 +22,9 @@ const TodoItem = ({ item }) => {
 
   const priorityColor = getPriorityColor(level);
   const badgeColor = getStatusColor(status);
-  const deadline = formatDateVN(dueDate);
+  const deadline = dueDate
+    ? dueDate.toLocaleDateString("vi-VN")
+    : "Không có hạn chót";
 
   return (
     <div

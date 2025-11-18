@@ -1,6 +1,21 @@
 import React, { useEffect, useState } from "react";
 
-const TodoFilter = ({ query, setQuery }) => {
+export interface Query {
+  _page: number;
+  _limit: number;
+  _sort: string;
+  _order: "asc" | "desc" | "";
+  q: string;
+  priority: string;
+  status: string;
+}
+
+interface TodoFilterProps {
+  query: Query;
+  setQuery: React.Dispatch<React.SetStateAction<Query>>;
+}
+
+const TodoFilter: React.FC<TodoFilterProps> = ({ query, setQuery }) => {
   const [search, setSearch] = useState(query.q || "");
 
   useEffect(() => {
@@ -101,8 +116,9 @@ const TodoFilter = ({ query, setQuery }) => {
           onChange={(e) =>
             setQuery((prev) => ({
               ...prev,
-              _sort: e.target.value ? "priority" : "",
-              _order: e.target.value || "",
+              _sort: "" as string,
+              _order: "" as "" | "asc" | "desc",
+              _page: 1,
             }))
           }
           style={{ padding: "6px 10px" }}

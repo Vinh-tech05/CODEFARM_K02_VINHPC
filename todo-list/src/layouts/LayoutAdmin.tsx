@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { LayoutDashboard, ListTodo, PlusCircle, Link } from "lucide-react";
+import TodoStatusBar from "../components/TodoStatus.js";
 
 const LayoutAdmin = () => {
   const navigate = useNavigate();
@@ -81,6 +82,9 @@ const LayoutAdmin = () => {
           </h2>
           <span className="text-sm text-gray-500">
             Hôm nay là {new Date().toLocaleDateString("vi-VN")}
+          </span>
+          <span className="text-sm text-gray-500">
+            <TodoStatusBar />
           </span>
         </header>
         <section className="flex-1 p-6">

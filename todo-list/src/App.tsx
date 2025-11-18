@@ -1,5 +1,5 @@
 import { ToastContainer } from "react-toastify";
-import AppRouter from "./routes";
+import AppRouter from "./routes/index.js";
 
 const App = () => {
   return (

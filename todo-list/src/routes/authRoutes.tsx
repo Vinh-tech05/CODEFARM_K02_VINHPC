@@ -1,7 +1,7 @@
-import FormRegister from "../pages/auth/FormRegister";
-import FormLogin from "../pages/auth/FormLogin";
+import FormRegister from "../pages/auth/FormRegister.js";
+import FormLogin from "../pages/auth/FormLogin.js";
 import LayoutAuth from "../layouts/LayoutAuth.js";
-import AuthProtected from "./protectedRoutes/AuthProtected";
+import AuthProtected from "./protectedRoutes/AuthProtected.js";
 
 const authRoutes = [
   {

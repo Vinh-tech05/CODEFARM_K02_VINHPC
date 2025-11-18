@@ -14,12 +14,15 @@ export const normalizePriority = (priority: any) => {
       label: priority.label ?? "Thấp",
     };
   }
-  const mapping = {
+
+  const mapping: Record<1 | 2 | 3, { level: number; label: string }> = {
     1: { level: 1, label: "Thấp" },
     2: { level: 2, label: "Trung bình" },
     3: { level: 3, label: "Cao" },
   };
-  return mapping[priority] || { level: 1, label: "Thấp" };
+
+  const key = Number(priority) as 1 | 2 | 3;
+  return mapping[key] || { level: 1, label: "Thấp" };
 };
 
 //! Xử lý trạng thái công việc
@@ -52,5 +55,5 @@ export const getStatusColor = (status: any) => {
 };
 
 //? Định dạng ngày theo kiểu Việt Nam
-export const formatDateVN = (date: Date) =>
+export const formatDateVN = (date: string | null) =>
   date ? new Date(date).toLocaleDateString("vi-VN") : "Không hợp lệ";

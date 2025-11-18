@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import TodoItem from "../../components/TodoItem";
+import TodoItem from "../../components/TodoItem.js";
+import type { Todo } from "../../types/todoType.js";
 
-const ImportantPage = () => {
-  const [todos, setTodos] = useState([]);
+const ImportantPage: React.FC = () => {
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchTodos = async () => {
@@ -11,14 +12,23 @@ const ImportantPage = () => {
         "https://api-class-o1lo.onrender.com/api/vinh/todos"
       );
       const { data } = await res.json();
-      const importantTasks = data.filter(
-        (item) => item.priority === 3 || item.priority?.level === 3
+
+      const isPriorityObj = (
+        p: number | { level: number; label: string } | undefined
+      ): p is { level: number; label: string } => {
+        return typeof p === "object" && p !== null && "level" in p;
+      };
+
+      const importantTasks: Todo[] = data.filter(
+        (item: Todo) =>
+          item.priority === 3 ||
+          (isPriorityObj(item.priority) && item.priority.level === 3)
       );
 
       setTodos(importantTasks);
-      setLoading(false);
     } catch (err) {
       console.error("Lỗi fetch dữ liệu:", err);
+    } finally {
       setLoading(false);
     }
   };

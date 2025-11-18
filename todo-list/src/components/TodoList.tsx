@@ -1,7 +1,12 @@
 import React from "react";
-import TodoItem from "./TodoItem";
+import TodoItem from "./TodoItem.js";
+import type { Todo } from "../types/todoType.js";
 
-const TodoList = ({ todos }) => {
+interface TodoListProps {
+  todos: Todo[];
+}
+
+const TodoList: React.FC<TodoListProps> = ({ todos }) => {
   return (
     <div
       style={{

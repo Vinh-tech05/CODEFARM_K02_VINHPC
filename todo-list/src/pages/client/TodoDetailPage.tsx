@@ -7,11 +7,12 @@ import {
   getPriorityColor,
   getStatusColor,
   formatDateVN,
-} from "../../utils/todoUtils";
+} from "../../utils/todoUtils.js";
+import type { Todo } from "../../types/todoType.js";
 
-const TodoDetailPage = () => {
-  const { id } = useParams();
-  const [todo, setTodo] = useState(null);
+const TodoDetailPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [todo, setTodo] = useState<Todo | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,7 +23,7 @@ const TodoDetailPage = () => {
           `https://api-class-o1lo.onrender.com/api/vinh/todos/${id}`
         );
         const { data } = await res.json();
-        setTodo(data);
+        setTodo(data as Todo);
       } catch (err) {
         console.error("Fetch todo error:", err);
       }
@@ -37,15 +38,18 @@ const TodoDetailPage = () => {
       </div>
     );
 
+  // ✅ Các thông tin todo
   const status = getStatus(todo);
   const { level, label } = normalizePriority(todo.priority);
   const dueDate = getValidDate(todo.dueDate);
   const priorityColor = getPriorityColor(level);
   const badgeColor = getStatusColor(status);
-  const deadline = formatDateVN(dueDate);
+  const deadline = dueDate
+    ? formatDateVN(dueDate.toISOString())
+    : "Không có hạn chót";
 
   const handleBack = () => {
-    if (location.state?.from) navigate(location.state.from);
+    if ((location.state as any)?.from) navigate((location.state as any).from);
     else navigate("/todos");
   };
 
@@ -56,38 +60,28 @@ const TodoDetailPage = () => {
       </h1>
 
       <div className="relative bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+        {/* Badge trạng thái */}
         <span
-          style={{
-            position: "absolute",
-            top: 8,
-            right: 8,
-            fontSize: 12,
-            background: badgeColor,
-            color: "#fff",
-            padding: "2px 8px",
-            borderRadius: 5,
-          }}
+          className="absolute top-2 right-2 text-xs text-white px-2 py-1 rounded"
+          style={{ background: badgeColor }}
         >
-          {" "}
-          {status}{" "}
+          {status}
         </span>
 
         <h3 className="text-xl font-semibold mb-2 text-gray-800">
           {todo.name}
         </h3>
         <p className="text-gray-600 mb-4 leading-relaxed">
-          {todo.description || "Không có mô tả."}
+          {todo.description ?? "Không có mô tả."}
         </p>
 
         <div className="space-y-2 text-sm">
           <p>
-            {" "}
             <strong>Ưu tiên:</strong>{" "}
-            <span style={{ color: priorityColor }}>{label}</span>{" "}
-          </p>{" "}
+            <span style={{ color: priorityColor }}>{label}</span>
+          </p>
           <p>
-            {" "}
-            <strong>Hạn chót:</strong> {deadline}{" "}
+            <strong>Hạn chót:</strong> {deadline}
           </p>
         </div>
       </div>

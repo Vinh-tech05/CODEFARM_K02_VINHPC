@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
-import api from "../../api";
+import api from "../../api/index.js";
 
 const schema = z.object({
   email: z.string().email("Email không hợp lệ").nonempty("Vui lòng nhập email"),
@@ -16,7 +16,9 @@ const schema = z.object({
   remember: z.boolean().optional(),
 });
 
-const FormLogin = () => {
+type FormLoginValues = z.infer<typeof schema>;
+
+const FormLogin: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -24,7 +26,7 @@ const FormLogin = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormLoginValues>({
     resolver: zodResolver(schema),
     defaultValues: {
       email: "",
@@ -33,7 +35,7 @@ const FormLogin = () => {
     },
   });
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values: FormLoginValues) => {
     try {
       setLoading(true);
 
@@ -41,11 +43,8 @@ const FormLogin = () => {
         email: values.email,
         password: values.password,
       });
-      // console.log(res.data);
 
       const token = res?.data?.data?.accessToken;
-      // console.log(token);
-
       if (!token) throw new Error("Token không hợp lệ");
 
       if (values.remember) {
@@ -56,10 +55,8 @@ const FormLogin = () => {
 
       toast.success("Đăng nhập thành công");
       navigate("/todos");
-    } catch (err) {
+    } catch (err: any) {
       const msg = err?.response?.data?.message || "Sai thông tin đăng nhập";
-      console.log(err);
-
       toast.error(msg);
     } finally {
       setLoading(false);

@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
-import api from "../../api";
+import api from "../../api/index.js";
 
 const schema = z
   .object({
@@ -18,8 +18,8 @@ const schema = z
       .min(7, "Mật khẩu tối thiểu 7 ký tự")
       .max(20, "Mật khẩu tối đa 20 ký tự"),
     confirmPassword: z.string().min(1, "Vui lòng xác nhận mật khẩu"),
-    agreeToTerms: z.literal(true, {
-      errorMap: () => ({ message: "Bạn phải đồng ý với điều khoản" }),
+    agreeToTerms: z.boolean().refine((val) => val === true, {
+      message: "Bạn phải đồng ý với điều khoản",
     }),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -27,7 +27,9 @@ const schema = z
     path: ["confirmPassword"],
   });
 
-const FormRegister = () => {
+type FormRegisterValues = z.infer<typeof schema>;
+
+const FormRegister: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -37,7 +39,7 @@ const FormRegister = () => {
     reset,
     watch,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormRegisterValues>({
     resolver: zodResolver(schema),
     defaultValues: {
       userName: "",
@@ -48,9 +50,9 @@ const FormRegister = () => {
     },
   });
 
-  const agreeToTerms = watch("agreeToTerms");
+  const agreeToTerms: boolean = watch("agreeToTerms");
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values: FormRegisterValues) => {
     try {
       setLoading(true);
       await api.post("/auth/register", {
@@ -62,7 +64,7 @@ const FormRegister = () => {
       toast.success("Đăng ký thành công");
       reset();
       navigate("/auth/login");
-    } catch (err) {
+    } catch (err: any) {
       const message = err?.response?.data?.message || "Đăng ký thất bại";
       toast.error(message);
     } finally {
