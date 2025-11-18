@@ -79,7 +79,7 @@ const TodoList = () => {
                       dispath(toggleCompletedAsync(todo._id, !todo.completed))
                     }
                     className={`border-b hover:bg-gray-50 transition cursor-pointer ${
-                      todo.completed ? "line-through opacity-50" : ""
+                      todo.completed ? "opacity-50" : ""
                     }`}
                   >
                     <td className="px-4 py-2 font-medium">{todo.name}</td>

@@ -5,9 +5,18 @@ type ID = {
   _id: number;
 };
 
+type FormTodoType = {
+  _id?: string;
+  name: string;
+  priority: number;
+  description: string;
+  dueDate: string;
+  completed: boolean;
+};
+
 export interface TodoState {
   todos: Todo[];
-  editingTodo?: Todo | undefined;
+  editingTodo?: FormTodoType | undefined;
 }
 
 export const initialState: TodoState = {
@@ -23,7 +32,7 @@ const todoSlice = createSlice({
       state.todos = action.payload;
     },
 
-    setEditingTodo(state, action: PayloadAction<Todo | undefined>) {
+    setEditingTodo(state, action: PayloadAction<FormTodoType>) {
       state.editingTodo = action.payload;
     },
 

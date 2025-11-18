@@ -50,20 +50,24 @@ const FormTodo = () => {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
-    const { name, value, type, checked: Checked } = e.target;
+    const { name, value, type } = e.target;
+
+    let val: string | number | boolean = value;
+
+    if (type === "checkbox") {
+      val = (e.target as HTMLInputElement).checked;
+    } else if (name === "priority") {
+      val = Number(value);
+    }
 
     dispatch(
       setEditingTodo({
         ...editingTodo!,
-        [name]:
-          type === "checkbox"
-            ? checked
-            : name === "priority"
-            ? Number(value)
-            : value,
+        [name]: val,
       })
     );
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
