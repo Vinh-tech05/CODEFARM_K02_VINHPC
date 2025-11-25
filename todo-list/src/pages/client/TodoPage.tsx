@@ -3,6 +3,7 @@ import TodoList from "../../components/TodoList.js";
 import TodoFilter from "../../components/TodoFilter.js";
 import Pagination from "../../components/Pagination.js";
 import type { Todo } from "../../types/todoType.js";
+import { Link } from "react-router-dom";
 
 interface Query {
   _page: number;
@@ -90,6 +91,12 @@ const TodoPage: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 font-sans">
+      <Link
+        to="/admin/todos/add"
+        className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition"
+      >
+        Thêm công việc
+      </Link>
       <h1 className="text-3xl sm:text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
         Danh Sách Việc Cần Làm
       </h1>

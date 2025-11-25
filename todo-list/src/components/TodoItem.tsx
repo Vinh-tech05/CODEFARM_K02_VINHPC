@@ -1,14 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { toggleCompletedAsync } from "../features/todoActions.js";
+import type { AppDispatch } from "../store/index.js";
+import type { Todo } from "../types/todoType.js";
 import {
+  getPriorityColor,
   getStatus,
+  getStatusColor,
   getValidDate,
   normalizePriority,
-  getPriorityColor,
-  getStatusColor,
-  formatDateVN,
 } from "../utils/todoUtils.js";
-import type { Todo } from "../types/todoType.js";
 interface TodoItemProps {
   item: Todo;
 }
@@ -26,6 +28,8 @@ const TodoItem: React.FC<TodoItemProps> = ({ item }) => {
     ? dueDate.toLocaleDateString("vi-VN")
     : "Không có hạn chót";
 
+  const dispatch = useDispatch<AppDispatch>();
+
   return (
     <div
       style={{
@@ -36,6 +40,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ item }) => {
         background: "#fff",
         position: "relative",
       }}
+      onClick={() => dispatch(toggleCompletedAsync(item._id, !item.completed))}
     >
       {/* Badge trạng thái */}
       <span

@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TodoItem from "./TodoItem.js";
 import type { Todo } from "../types/todoType.js";
+import { fetchTodos } from "../features/todoActions.js";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../store/index.js";
 
 interface TodoListProps {
   todos: Todo[];
 }
 
-const TodoList: React.FC<TodoListProps> = ({ todos }) => {
+const TodoList: React.FC<TodoListProps> = () => {
+  const dispath = useDispatch<AppDispatch>();
+  const todos = useSelector((state: RootState) => state.todos.todos || []);
+  useEffect(() => {
+    dispath(fetchTodos());
+  }, []);
+
   return (
     <div
       style={{
